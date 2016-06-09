@@ -11,10 +11,10 @@
 var childProcess = require('child_process'), format = require('util').format, os = require('os'), path = require('path');
 
 module.exports = function (grunt) {
-    var SONAR_RUNNER_HOME = process.env.SONAR_RUNNER_HOME || __dirname+'/../sonar-runner-2.4';
+    var SONAR_RUNNER_HOME = process.env.SONAR_RUNNER_HOME || __dirname+'/../sonar-scanner-2.6.1';
     var SONAR_RUNNER_OPTS = process.env.SONAR_RUNNER_OPTS || "";
 
-    var JAR = '/lib/sonar-runner-dist-2.4.jar';
+    var JAR = '/lib/sonar-scanner-dist-2.6.1.jar';
     var SONAR_RUNNER_COMMAND = 'java ' + SONAR_RUNNER_OPTS + ' -jar ' + SONAR_RUNNER_HOME + JAR+' -Drunner.home=' + SONAR_RUNNER_HOME;        
     var LIST_CMD = (/^win/).test(os.platform()) ? 'dir '+SONAR_RUNNER_HOME + JAR : 'ls '+SONAR_RUNNER_HOME + JAR;
 
@@ -88,7 +88,7 @@ module.exports = function (grunt) {
 
         var execCmd = dryRun ? LIST_CMD : SONAR_RUNNER_COMMAND;
 
-        grunt.log.writeln("sonar-runner exec: " + SONAR_RUNNER_COMMAND);
+        grunt.log.writeln("sonar-scanner exec: " + SONAR_RUNNER_COMMAND);
 
         var exec = childProcess.exec(execCmd,
             options.maxBuffer ? { maxBuffer: options.maxBuffer } : {},
